@@ -9,6 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
+@available(OSXApplicationExtension 10.10, *)
 class Advertiser: NSObject, MCNearbyServiceAdvertiserDelegate {
 
     let mcSession: MCSession

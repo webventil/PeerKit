@@ -13,6 +13,7 @@ enum TransceiverMode {
     case Browse, Advertise, Both
 }
 
+@available(OSXApplicationExtension 10.10, *)
 public class Transceiver: SessionDelegate {
 
     var transceiverMode = TransceiverMode.Both

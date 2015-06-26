@@ -9,6 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
+@available(OSXApplicationExtension 10.10, *)
 public protocol SessionDelegate {
     func connecting(myPeerID: MCPeerID, toPeer peer: MCPeerID)
     func connected(myPeerID: MCPeerID, toPeer peer: MCPeerID)
@@ -17,6 +18,7 @@ public protocol SessionDelegate {
     func finishReceivingResource(myPeerID: MCPeerID, resourceName: String, fromPeer peer: MCPeerID, atURL localURL: NSURL)
 }
 
+@available(OSXApplicationExtension 10.10, *)
 public class Session: NSObject, MCSessionDelegate {
     public private(set) var myPeerID: MCPeerID
     var delegate: SessionDelegate?

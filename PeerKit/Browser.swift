@@ -11,6 +11,7 @@ import MultipeerConnectivity
 
 let timeStarted = NSDate()
 
+@available(OSXApplicationExtension 10.10, *)
 class Browser: NSObject, MCNearbyServiceBrowserDelegate {
 
     let mcSession: MCSession
