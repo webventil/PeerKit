@@ -111,7 +111,7 @@ public func stopTransceiving() {
 
 // MARK: Events
 
-public func sendEvent(event: String, object: AnyObject? = nil, toPeers peers: [MCPeerID]? = session?.connectedPeers as? [MCPeerID]) {
+public func sendEvent(event: String, object: AnyObject? = nil, toPeers peers: [MCPeerID]? = session?.connectedPeers as [MCPeerID]?) {
     if peers == nil || (peers!.count == 0) {
         return
     }
@@ -120,16 +120,22 @@ public func sendEvent(event: String, object: AnyObject? = nil, toPeers peers: [M
         rootObject["object"] = object
     }
     let data = NSKeyedArchiver.archivedDataWithRootObject(rootObject)
-    session?.sendData(data, toPeers: peers, withMode: .Reliable, error: nil)
+
+    if let peers = peers {
+        do {
+            try session?.sendData(data, toPeers: peers, withMode: .Reliable)
+        } catch _ {
+        }
+    }
 }
 
 public func sendResourceAtURL(resourceURL: NSURL!,
                    withName resourceName: String!,
-  toPeers peers: [MCPeerID]? = session?.connectedPeers as? [MCPeerID],
-  withCompletionHandler completionHandler: ((NSError!) -> Void)!) -> [NSProgress]! {
+  toPeers peers: [MCPeerID]? = session?.connectedPeers as [MCPeerID]?,
+  withCompletionHandler completionHandler: ((NSError!) -> Void)!) -> [NSProgress?]! {
 
-    if let session = session {
-        return peers?.map { peerID in
+    if let session = session, peers = peers {
+        return peers.map { peerID in
             return session.sendResourceAtURL(resourceURL, withName: resourceName, toPeer: peerID, withCompletionHandler: completionHandler)
         }
     }
