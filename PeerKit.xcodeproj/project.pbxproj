@@ -271,6 +271,7 @@
 		E89FD6B71A0C3CDC00C2FEF7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "JP Simard";

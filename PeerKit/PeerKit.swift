@@ -156,11 +156,11 @@ public func sendEvent(event: String, object: AnyObject? = nil, toPeers peers: [M
 public func sendResourceAtURL(resourceURL: NSURL!,
                    withName resourceName: String!,
   toPeers peers: [MCPeerID]? = session?.connectedPeers as [MCPeerID]?,
-  withCompletionHandler completionHandler: ((NSError!) -> Void)!) -> [NSProgress?]! {
+  withCompletionHandler completionHandler: ((NSError?) -> Void)!) -> [NSProgress?]! {
 
     if let session = session, peers = peers {
         return peers.map { peerID in
-            return session.sendResourceAtURL(resourceURL, withName: resourceName, toPeer: peerID, withCompletionHandler: completionHandler)
+            return session.sendResourceAtURL(resourceURL, withName: resourceName, toPeer: peerID, withCompletionHandler: completionHandler)!
         }
     }
     return nil
